@@ -694,3 +694,810 @@ Clearly, إذا جربت القيام بعمليات جمع بين المتغي�
     >>> e
     {'k2': 'engel', 'k1': 'olivier'}
 
+# دوال البايثون
+
+Une fonction (ou function) est une suite d'instructions que l'on peut appeler avec un nom.
+
+## Créer ma première fonction
+Créons une fonction qui nous retournera un âge:
+
+    >>> def indique_mon_age():
+    ...     return 30;
+    ... 
+    >>> indique_mon_age()
+    30
+Vous ne pouvez pas copier coller ce code, vous devez entrer chaque ligne à la main et appuyer sur entrée pour retourner à la ligne. Les 3 chevrons et les 3 points sont affichés par l'interpréteur python.
+
+Tout d'abord pour indiquer à l'interpréteur que vous voulez créer une fonction, on utiliser le mot clé def suivi d'un nom puis de parenthèses et ensuite d'un double point.
+
+On remarque également qu'il y a un espace entre les 3 points et le mot clé "return", il s'agit d'une indentation, c'est à dire un espace qui améliore non seulement la lecture de la fonction mais qui indique que nous sommes toujours dans la fonction. Lorsque l'action demandée n'est plus dans la fonction, il ne faut plus indenter le texte. Pour indenter du texte, vous devez appuyer sur la touche TAB de votre clavier -ou dans d'autres cas créer 4 espaces manuellement-.
+
+## Les paramètres
+Créons une autre fonction:
+    >>> def augmente_moi(a):
+    ...     return augmente_moi + 2
+    ... 
+    >>> augmente_moi(1)
+    3
+Cette fonction incrémente de 2 une valeur que l'on passe en paramètre.
+
+Il est d'ailleurs possible d'utiliser plusieurs paramètres:
+
+    >>> def augmente_moi(a, b):
+    ...     return 30 + a + b
+    ... 
+    >>> augmente_moi(1, 2)
+    33
+Si vous avez compris les principes des fonctions, vous avez compris 80% de ce qu'est la programmation.
+
+## Un paramètre est obligatoire
+Lorsque vous indiquez des paramètres à une fonction, ces dernièrs doivent impérativement être renseignés sans quoi une erreur apparaitra.
+    >>> def augmente_moi(a, b):
+    ...     return 30 + a + b
+    ...
+    >>> augmente_moi(1)
+    Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+    TypeError: augmente_moi() takes exactly 2 arguments (1 given)
+## L'opérateur splat
+L'opérateur splat : * est très souvent utilisé en python.
+
+    def ma_function(*var)
+    def ma_function(**var)
+    ma_function(*var)
+    ma_function(**var)
+## Une liste en paramètre
+On peut récupérer les valeurs renseignées via une liste:
+
+    >>> def augmente_moi(*param):
+    ...     return param[0] + param[1] + param[2]
+    ... 
+    >>> augmente_moi(1, 2, 3)
+    6
+    >>> augmente_moi(10, 20, 30)
+    60
+## Rendre obligatoire uniquement certains paramètres avec une liste
+Si vous désirez rendre obligatoire uniquement certains paramètres, vous pouvez utiliser la syntaxe suivante:
+
+    >>> def ma_fiche(prenom, nom, *reste):
+    ...     return prenom + " " + nom 
+    ... 
+    >>> ma_fiche("olivier","engel")
+    'olivier engel'
+On remarque que le paramètres "reste" est précédé d'une étoile *.
+## Utiliser un dictionnaire pour les paramètres
+Vous pouvez utiliser un dictionnaire en paramètres pour cela vous devez ajouter une double étoile: **
+
+    >>> def ma_fiche(**parametres):
+    ...     return parametres["prenom"]
+    ...
+    >>> ma_fiche(prenom="olivier")
+    'olivier'
+## Utilisation de splat liste au niveau des appels de fonctions
+Reprennons l'exemple de la fonction augmente_moi:
+
+    >>> def augmente_moi(*param):
+    ...     return param[0] + param[1] + param[2]
+    ... 
+Nous avons vu qu'il était possible de faire ceci:
+
+    >>> augmente_moi(1, 2, 3)
+    6
+L'utilisation de l'étoile permet de passer par une liste:
+
+    >>> data = [1, 2, 3]
+    >>> augmente_moi(*data)
+    6
+## Utilisation de splat dictionnaire au niveau des appels de fonctions
+Prénons l'exemple de cette fonction:
+
+    >>> def test(firstname="", lastname=""):
+    ...     return "{} {}" .format(firstname, lastname)
+Créons notre dictionnaire:
+
+    >>> data = {'firstname':'olivier',     'lastname':'engel'}
+Et envoyons notre variable avec une étoile *
+
+    >>> test(*data)
+    'lastname firstname'
+Puis avec deux étoiles **
+
+    >>> test(**data)
+    'olivier engel'
+## Portée des variables (variable globale et variable locale)
+Une variable déclarée à la racine d'un module est visible dans tout ce module. On parle alors de variable globale.
+
+    >>> x = "hello"
+    >>> def test():
+    ...     print x
+    ... 
+    >>> test()
+    hello
+Et une variable déclarée dans une fonction ne sera visible que dans cette fonction. On parle alors de variable locale.
+
+    >>> x = False
+    >>> def test():
+    ...     x = "hello"
+    ... 
+    >>> test()
+    >>> x
+    False
+## Procédure et fonctions
+Pour votre culture informatique sachez qu'une fonction n'est pas obligée de renvoyer une valeur, on parlera alors dans ce cas plutôt de procédure.
+
+# Les fonctions prédéfinies de python
+Les fonctions prédéfinies
+Il existe des fonctions internes à python (ou builtin).
+
+abs(x)
+Retourne une valeur absolue
+
+>>> abs(-1)
+1
+all(iterable)
+Retourne True si tous les éléments d'un élément itérable sont True
+
+>>> liste = [True,True,True,1]
+>>> all(liste)
+True
+any(iterable)
+Retourne True si au moins un élément d'un élément itérable est True
+
+>>> liste = [True,False, True]
+>>> any(liste)
+True
+bin(x)
+Convertit un integer en chaine de caractères binaires.
+
+>>> bin(101)
+'0b1100101'
+callable(object)
+Determine si un objet est callable.
+
+>>> callable("A")
+False
+>>> callable(int)
+True
+str.capitalize()
+La méthode capitalize permet de mettre une chaine de caractères au format Xxxxx
+
+>>> "oLIviER".capitalize()
+'Olivier'
+choice([])
+Retourne une valeur d'une liste aléatoirement.
+
+>>> import random
+>>> random.choice([1,2,3,4,5])
+3
+>>> random.choice([1,2,3,4,5])
+2
+str.count(string)
+La méthode count compte le nombre d'occurences de la recherche demandée.
+
+>>> "olivier".count("i")
+2
+dir(object)
+Indique les noms de la structure de l'objet.
+
+>>> dir(int)
+['__abs__', '__add__', '__and__', '__class__', '__cmp__', '__coerce__', '__delattr__', '__div__', '__divmod__', '__doc__', '__float__', '__floordiv__', '__format__', '__getattribute__', '__getnewargs__', '__hash__', '__hex__', '__index__', '__init__', '__int__', '__invert__', '__long__', '__lshift__', '__mod__', '__mul__', '__neg__', '__new__', '__nonzero__', '__oct__', '__or__', '__pos__', '__pow__', '__radd__', '__rand__', '__rdiv__', '__rdivmod__', '__reduce__', '__reduce_ex__', '__repr__', '__rfloordiv__', '__rlshift__', '__rmod__', '__rmul__', '__ror__', '__rpow__', '__rrshift__', '__rshift__', '__rsub__', '__rtruediv__', '__rxor__', '__setattr__', '__sizeof__', '__str__', '__sub__', '__subclasshook__', '__truediv__', '__trunc__', '__xor__', 'bit_length', 'conjugate', 'denominator', 'imag', 'numerator', 'real']
+str.endswith(str)
+La méthode endswith test si une chaine de caractères se termine par la chaine demandée
+
+>>> a = "olivier"
+>>> a.endswith("r")
+True
+>>> a.endswith("er")
+True
+>>> a.endswith("é")
+False
+eval(expression,globals=None,locals=None)
+Execute une chaine de caractères.
+
+>>> v = 101
+>>> eval('v+1')
+102
+str.find(string)
+La méthode find trouve la première occurence de la recherche demandée.
+
+>>> "olivier".find("i")
+2
+help(element)
+Cette fonction vous retourne des informations sur l'utilisation de l'élément qui vous intéresse.
+
+>>> help(int)
+
+Help on class int in module __builtin__:
+
+class int(object)
+ |  int(x=0) -> int or long
+ |  int(x, base=10) -> int or long
+ |  
+ |  Convert a number or string to an integer, or return 0 if no arguments
+ |  are given.  If x is floating point, the conversion truncates towards zero.
+ |  If x is outside the integer range, the function returns a long instead.
+ |  
+ |  If x is not a number or if base is given, then x must be a string or
+ |  Unicode object representing an integer literal in the given base.  The
+ |  literal can be preceded by '+' or '-' and be surrounded by whitespace.
+ |  The base defaults to 10.  Valid bases are 0 and 2-36.  Base 0 means to
+ |  interpret the base from the string as an integer literal.
+ |  >>> int('0b100', base=0)
+ |  4
+hex
+Convertit un nombre en valeur hexadécimale.
+
+>>> hex(16)
+'0x10'
+str.isalnum()
+Retoune True si tous les caractères sont alphanumériques et qu'il y a au moins un caractère. Sinon False.
+
+>>> "25".isalnum()
+True
+>>> "25b".isalnum()
+True
+>>> "25bé".isalnum()
+True
+>>> "25bé@".isalnum()
+False
+>>> "-".isalnum()
+False
+>>> "_".isalnum()
+False
+>>> "".isalnum()
+False
+str.isalpha()
+Retourne True si tous les caractères sont des lettres et qu'il y a au moins un caractère. Sinon False
+
+>>> "x".isalpha()
+True
+>>> "-".isalpha()
+False
+>>> "12".isalpha()
+False
+>>> "jean-claude".isalpha()
+False
+>>> "jean claude".isalpha()
+False
+>>> "élise".isalpha()
+True
+str.isdigit()
+Retourne True si tous les caractères sont numériques et qu'il y a au moins un caractère. Sinon False.
+
+>>> "1".isdigit()
+True
+>>> "1.5".isdigit()
+False
+>>> "1,5".isdigit()
+False
+>>> "3b".isdigit()
+False
+>>> " ".isdigit()
+False
+str.islower()
+Retoune True si tous les caractères sont en minuscule.
+
+>>> "olivier".islower()
+True
+>>> "Olivier".islower()
+False
+str.isspace()
+Retoune True si il n'y a que des espaces et au moins un caractère.
+
+>>> " ".isspace()
+True
+>>> "jean louis".isspace()
+False
+>>> "    ".isspace()
+True
+str.istitle()
+Retourne True si la chaine a un format titre.
+
+>>> "Titre".istitle()
+True
+>>> "TitrE".istitle()
+False
+>>> "Titre de mon site".istitle()
+False
+>>> "Titre De Mon Site".istitle()
+True
+str.isupper()
+Retourne True si tous les caractères sont en majucule et qu'il y a au moins un caractère.
+
+>>> "OLIVIER".isupper()
+True
+>>> "Olivier".isupper()
+False
+>>> "OlivieR".isupper()
+False
+str.join(liste)
+La méthode join transforme une liste en chaine de caractères.
+
+>>> ":".join(["olivier", "engel"])
+'olivier:engel'
+len(s)
+Retourne le nombre d'items d'un objet.
+
+>>> len([1,2,3])
+3
+>>> len("olivier")
+7
+locals()
+Retounr un dictionnaire avec les valeurs des variables en cours.
+
+>>> locals()
+{'a': 12, '__builtins__': , '__package__': None, 'i': 20, 'v': 101, 'liste': [True, False, True], '__name__': '__main__', '__doc__': None}
+str.lower()
+La méthode lower permet de mettre en minuscule une chaine de caractères.
+
+>>> "OLIVIER".lower()
+'olivier'
+map(function, [])
+Execute une fonction sur chaque item d'un élément itérable.
+
+>>> def add_one(x):
+...     return x + 1
+... 
+>>> map(add_one, [1,2,3])
+[2, 3, 4]
+max() / min()
+Retourne la valeur la plus élévée pour max() et la plus basse pour min()
+
+>>> max([1,3,2,6,99,1])
+99
+>>> max(1,4,6,12,1)
+12
+randint()
+Retourne un int aléatoire.
+
+>>> import random
+>>> random.randint(1,11)
+5
+random()
+Retourne une valeur aléatoire.
+
+>>> import random
+>>> random.random()
+0.9563522652738929
+str.replace(string, string)
+La méthode replace remplace un segment d'une chaine de caractères par une autre:
+
+>>> "olivier".replace("i", "a")
+'olavaer'
+reverse()
+La méthode reverse inverse l'ordre d'une liste.
+
+>>> x = [1,4,7]
+>>> x.reverse()
+>>> x
+[7, 4, 1]
+reversed([])
+Retourne un itérateur inversé.
+
+>>> list(reversed([1,2,3,4]))
+[4, 3, 2, 1]
+round(number)
+Arrondi un nombre.
+
+>>> round(1)
+1.0
+>>> round(1.2)
+1.0
+>>> round(1.5)
+2.0
+>>> round(1.7)
+2.0
+>>> round(-1.7)
+-2.0
+>>> round(-1.2)
+-1.0
+shuffle([])
+Mélange aléatoirement une liste.
+
+>>> import random
+>>> x = [1,2,3,4,5]
+>>> random.shuffle(x)
+>>> x
+[2, 5, 4, 1, 3]
+str.startswith(prefix[, start[, end]])
+Retourne True si la chaine commence par le préfix indiqué. Ce préfix peut être un tuple. Les paramètres start et end (optionnel) test la chaine à la position indiquée. Le test est sensible à la case.
+
+>>> "olivier".startswith("ol")
+True
+>>> "olivier".startswith(("ol", "eng"))
+True
+>>> "olivier".startswith(("xxx", "eng"))
+False
+>>> "olivier".startswith("OL")
+False
+>>> "olivier".startswith("ol")
+True
+list.sort()
+La méthode sort permet de trier une liste.
+
+>>> l = [5,1,4,2,10]
+>>> l.sort()
+>>> l
+[1, 2, 4, 5, 10]
+sorted(iterable)
+Tri un élément itérable.
+
+>>> sorted([3,2,12,1])
+[1, 2, 3, 12]
+str.split(séparateur)
+La méthode split transforme une chaine de caractères en liste.
+
+>>> "olivier:engel".split(":")
+['olivier', 'engel']
+str.splitlines([keepends])
+Retourne une liste des lignes de la chaine. Cette méthode utilise le saut à la ligne universel, le retour à la ligne n'est pas inclu, à moins de renseigner le paramètre keepends à True.
+
+>>> "olivier\n\n\engel\n\ndéveloppeur".splitlines()
+['olivier', '', '\\engel', '', 'développeur']
+>>> "olivier\nengel\ndéveloppeur".splitlines()
+['olivier', 'engel', 'développeur']
+>>> "olivier\n\rengel\n\rdéveloppeur".splitlines()
+['olivier', '', 'engel', '', 'développeur']
+>>> "olivier\r\nengel\r\ndéveloppeur".splitlines()
+['olivier', 'engel', 'développeur']
+>>> "olivier\r\nengel\r\n\r\ndéveloppeur".splitlines()
+['olivier', 'engel', '', 'développeur']
+>>> "olivier\r\nengel\r\n\r\ndéveloppeur".splitlines(True)
+['olivier\r\n', 'engel\r\n', '\r\n', 'développeur']
+sum(iterable [,start])
+Additionne les valeurs d'un élément itérable.
+
+>>> sum([1,2,3])
+6
+str.title()
+Transforme la chaine dans un format title.
+
+>>> "Ceci est un titre".title()
+'Ceci Est Un Titre'
+upper()
+La méthode upper permet de mettre en majuscule une chaine de caractères.
+
+>>> "olivier".upper()
+'OLIVIER'
+zip(*iterables)
+Permet de regrouper sous la forme d'un tuple les items de listes.
+
+>>> a = ["olivier", "bruce", "john"]
+>>> b = ["engel", "wayne", "Wayne"]
+>>> zip(a,b)
+[('olivier', 'engel'), ('bruce', 'wayne'), ('john', 'Wayne')]
+
+
+# IF ELIF ELSE Python Conditions
+
+Cette notion est l'une des plus importante en programmation. L'idée est de dire que si telle variable a telle valeur alors faire cela sinon cela.
+
+Prenon un exemple, on va donner une valeur à une variable et si cette valeur est supérieur à 5, alors on va incrémenter la valeur de 1
+
+>>> a = 10
+>>> if a > 5:
+...     a = a + 1
+... 
+>>> a
+11
+Que se passe-t-il si la valeur était inférieure à 5?
+
+>>> a = 3
+>>> if a > 5:
+...     a = a + 1
+... 
+>>> a
+3
+On remarque que si la condition n'est pas remplie, les instructions dans la structure conditionnelle sont ignorées.
+
+Condition if else
+Il est possible de donner des instructions quelque soit les choix possibles avec le mot clé else.
+
+>>> a = 20
+>>> if a > 5:
+...     a = a + 1
+... else:
+...     a = a - 1
+... 
+>>> a
+21
+Changeons uniquement la valeur de la variable a:
+>>> a = 3
+>>> if a > 5:
+...     a = a + 1
+... else:
+...     a = a - 1
+... 
+>>> a
+2
+Condition elif
+Il est possible d'ajouter autant de conditions précises que l'on souhaite en ajoutant le mot clé elif, contraction de "else" et "if", qu'on pourrait traduire par "sinon".
+
+>>> a = 5
+>>> if a > 5:
+...     a = a + 1
+... elif a == 5:
+...     a = a + 1000
+... else:
+...     a = a - 1
+... 
+>>> a
+1005
+Dans cet exemple, on a repris le même que les précédent mais nous avons ajouté la conditions "Si la valeur est égale à 5" que se passe-t-il? Et bien on ajoute 1000.
+Les comparaisons possibles
+Il est possible de comparer des éléments:
+
+==      égal à 
+!=      différent de (fonctionne aussi avec )
+>       strictement supérieur à 
+>=      supérieur ou égal à
+<       strictement inférieur à 
+<=      inférieur ou égal à
+Comment fonctionne les structures conditionnelles?
+Les mots clé if, elif et else cherchent à savoir si ce qu'on leur soumet est True. En anglais True signifique "Vrai". Donc si c'est la valeur est True, les instructions concernant la condition seront exécutée.
+
+Comment savoir si la valeur qu'on soumet à l'interpreteur est True? Il est possible de le voir directement dans l'interpréteur.
+
+Demandons à python si 3 est égal à 4:
+
+>>> 3 == 4
+False
+Il vous répondra gentiment que c'est False, c'est à dire que c'est faux.
+
+Maintenant on va donner une valeur à une variable est on va lui demander si la valeur correspond bien à ce que l'on attend.
+
+>>> a = 5
+>>> a == 5
+True
+AND / OR
+Il est possible d'affiner une condition avec les mots clé AND qui signifie "ET" et OR qui signifie "OU".
+
+On veut par exemple savoir si une valeur est plus grande que 5 mais aussi plus petite que 10:
+
+>>> v = 15
+>>> v > 5 and v < 10
+False
+Essayons avec la valeur 7:
+
+>>> v = 7
+>>> v > 5 and v < 10
+True
+Pour que le résultat soit TRUE, il faut que les deux conditions soient remplies
+
+Testons maintenant la condition OR
+
+>>> v = 11
+>>> v > 5 or v > 100
+True
+Le résultat est TRUE parce qu'au moins une des deux conditions est respectée.
+
+>>> v = 1
+>>> v > 5 or v > 100
+False
+Dans ce cas la aucune condition n'est respectée, le résultat est donc FALSE.
+
+Chainer les comparateurs
+Il est également possible de chainer les comparateurs:
+
+>>> a, b, c = 1, 10, 100
+>>> a < b < c
+True
+>>> a > b < c
+False
+
+# Les boucles for et while Python
+Une boucle ( ou loop ) vous permet de répéter à l'infini des instructions selon vos besoins.
+
+Le boucle while
+En anglais "while" signifie "Tant que". Pour créer une boucle, il faut donc utiliser ce mot clé suivi d'une indication qui dit quand la boucle s'arrête.
+
+Un exemple sera plus parlant:
+
+On désire écrire 100 fois cette phrase:
+
+"Je ne dois pas poser une question sans lever la main"
+
+Ecrire à la main prend beaucoup de temps et beaucoup de temps x 100 s'est vraiment beaucoup de temps, et peu fiable, même pour les chanceux qui connaissent le copier-coller. Et un bon programmeur est toujours un peu fainéant perfectionniste, il cherchera la manière la plus élégante de ne pas répéter du code.
+
+>>> i = 0
+>>> while i < 10:
+...     print("Je ne dois pas poser une question sans lever la main")
+...     i = i +1
+... 
+Je ne dois pas poser une question sans lever la main
+Je ne dois pas poser une question sans lever la main
+Je ne dois pas poser une question sans lever la main
+Je ne dois pas poser une question sans lever la main
+Je ne dois pas poser une question sans lever la main
+Je ne dois pas poser une question sans lever la main
+Je ne dois pas poser une question sans lever la main
+Je ne dois pas poser une question sans lever la main
+Je ne dois pas poser une question sans lever la main
+Je ne dois pas poser une question sans lever la main
+La boucle for
+La boucle for permet de faire des itérations sur un élément, comme une chaine de caractères par exemple ou une liste.
+
+Exemple:
+
+>>> v = "Bonjour toi"
+>>> for lettre in v:
+...     print lettre
+... 
+B
+o
+n
+j
+o
+u
+r
+ 
+t
+o
+i
+Range
+Il est possible de créer une boucle facilement avec range:
+
+for i in range(0,100):
+    print i
+Stopper une boucle avec break
+Pour stopper immédiatement une boucle on peut utiliser le mot clé break:
+
+>>> liste = [1,5,10,15,20,25]
+>>> for i in liste:
+...     if i > 15:
+...             print "On stoppe la boucle"
+...             break
+...     print i
+... 
+1
+5
+10
+15
+On stoppe la boucle
+
+# Les modules et les packages en python
+
+Jusqu'à présent nous avons réussi à créer des petits morceaux de code sans grand intérêt car très peu ambitieux. Le problème de l'interpréteur c'est qu'une fois celui-ci fermé votre travail est perdu.
+
+L'idée d'un programme c'est d'enregistrer votre travail dans un fichier et ensuite de l'exécuter. Cela augmente votre productivité mais possède de nombreux avantages comme le copier-coller massif ou tout simplement le travail collaboratif. Lorsque du code est enregistré dans un fichier exécutable on parle de script.
+
+Créer son premier script python
+Tout d'abord vous devez créer un fichier avec l'extension .py -dans notre exemple on le nommera fiche.py - dans le dossier que vous voulez (l'emplacement n'a aucune importance).
+
+
+
+Ouvrez ensuite le fichier.
+
+Hello world
+Le traditionnel hello world se fait ainsi:
+
+#!/usr/bin/python2.7
+#-*- coding: utf-8 -*-
+print "Bonjour monde"
+La première ligne indique qu'il s'agit de code python. 
+La deuxième ligne indique le type d'encodage utilisé. Je vous conseille toujours quelque soit votre projet et votre langage de programmation de passer par de l'UTF-8 et la troisème ligne vous connaissez déjà.
+
+Exécuter un script python
+Pour exécuter un script python sur ubuntu il vous suffit de lancer la commande suivante:
+
+python /chemin_vers_votre_script/fiche.py
+Faire interagir l'utilisateur
+Un programme n'est pas très intéressant si l'utilisateur ne peut pas dialoguer avec celui-ci.
+
+On va créer un petit script qui demande l'âge à l'utilisateur et on affichera cette valeur par la suite:
+
+#!/usr/bin/python2.7
+#-*- coding: utf-8 -*-
+
+age = input("Quel est votre age? : ")
+print "Vous avez %d ans" % age
+A noter que si vous travaillez avec python 2.7, il est impossible de faire passer des données autres que numériques à la fonction input, pour python 2.7 on préférera utiliser la fonction raw_input qui fait sensiblement la même chose.
+
+Les commentaires en python
+Que vous soyez seul à développer vos scripts ou à plusieurs, il sera toujours indispensable de commenter votre travail. Par exemple si vous créez une fonction qui s'étale sur des centaines de lignes de code, il sera plus efficace d'écrire un petit descriptif de votre fonction au dessus de celle-ci plutôt que de devoir relire tout le code pour comprendre cette fonction des mois plus tard.
+
+Les commentaires en python commencent par le signe #
+
+Exemple:
+
+#!/usr/bin/python2.7
+#-*- coding: utf-8 -*-
+
+# Cette fonction pose une question à l'utilisateur 
+# et celui-ci devra répondre par un nombre obligatoirement
+
+age = input("Quel est votre age? : ")
+print "Vous avez %d ans" % age
+Importer des fonctions d'autres fichiers
+Pour les projets les plus ambitieux il sera vite important d'organiser son travail. Les fonctions vont se multiplier et il faudra les enregistrer dans des fichiers distincts pour plus de flexibilité.
+
+Créons un autre fichier que nous nommerons func.py dans le même dossier que le fichier fiche.py
+
+func.py
+
+#!/usr/bin/python2.7
+#-*- coding: utf-8 -*-
+
+def ajoute_un(v):
+    return v + 1
+fiche.py
+
+#!/usr/bin/python2.7
+#-*- coding: utf-8 -*-
+
+from func import *
+
+age = input("Quel est votre age? : ")
+print "Vous avez %d ans" % age
+
+age_plus_un = ajoute_un(age)
+
+print "Dans un an vous aurez %d ans" % age_plus_un
+Instructions, fonctions, modules, packages
+Nous avons donc vu que lorsque l'on regroupe des fonctions dans un fichier on crée un ensemble de fonctions que l'on nomme "module".
+
+Lorsque l'on cherche à regrouper des modules, on parle de package.
+
+Créer un package
+Pour créer votre propre package, commencez par créer dans le même dossier que votre programme - un dossier portant le nom de votre package. Dans notre exemple, nous le nommerons "utils".
+
+Dans ce dossier, créons le fichier suivant: __init__.py, cela indique à python qu'il s'agit d'un package. Ce fichier peut être vide, seule sa présence est importante.
+
+Ensuite créons un fichier toujours dans ce réportoire utils que nous nommerons par exemple "operations.py"
+
+Contenu du dossier de votre projet:
+
+
+
+Contenu du dossier utils:
+
+
+
+Maintenant éditons le fichier operations.py et créons une nouvelle fonction
+
+#!/usr/bin/python2.7
+#-*- coding: utf-8 -*-
+
+def ajoute_deux(v):
+    return v + 2
+Puis ajoutons un appel vers cette fonction dans le fichier fiche.py
+
+#!/usr/bin/python2.7
+#-*- coding: utf-8 -*-
+
+from func import *
+from utils.operations import ajoute_deux
+
+age = input("Quel est votre age? : ")
+print "Vous avez %d ans" % age
+
+age_plus_un = ajoute_un(age)
+
+print "Dans un an vous aurez %d ans" % age_plus_un
+
+age_plus_deux = ajoute_deux(age)
+
+print "Dans un an vous aurez %d ans" % age_plus_deux
+Alors que remarque-t-on? Tout d'abord on importe un package avec les mots clé from et import, ensuite pour appeler une fonction précise, on passe par la hiérarchie suivante:
+
+from package.module import fonction
+Si vous voulez importer toutes les fonctions d'un module, vous pouvez indiquer une étoile * qui signifie souvent en informatique "TOUS".
+
+Les modules de python
+Voici une liste de modules de base que vous serez amené un jour ou l'autre à utiliser.
+
+random   : fonctions permettant de travailler avec des valeurs aléatoires
+math     : toutes les fonctions utiles pour les opérations mathématiques (cosinus,sinus,exp,etc.)
+sys      : fonctions systèmes
+os       : fonctions permettant d'interagir avec le système d'exploitation
+time     : fonctions permettant de travailler avec le temps
+calendar : fonctions de calendrier
+profile  : fonctions permettant d'analyser l'execution des fonctions
+urllib2  : fonctions permettant de récupérer des informations sur internet
+re       : fonctions permettant de travailler sur des expressions régulières
+Les extensions des fichiers python
+Il existe plusieurs extensions de fichier qui tournent autour de python:
+
+.py  -> script modifiable
+.pyc -> script compilé
+.pyw -> script executé sans lancement de terminal (sous windows)
