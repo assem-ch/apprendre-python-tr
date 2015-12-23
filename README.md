@@ -1,3 +1,5 @@
+> http://apprendre-python.com/
+
 #تعلّم لغة بايثون للبرمجة:
 **بايثون** هي **لغة برمجة** من اللغات الأكثر أهمية حاليا. لغة سهلة  التعلم، تستعمل كثيرا كأمثلة خلال تدريس البرمجة. ستجد في هذه السلسلة من الدروس القواعد الأساسية لفهم هذه اللغة.
 
@@ -695,67 +697,72 @@ Clearly, إذا جربت القيام بعمليات جمع بين المتغي�
     {'k2': 'engel', 'k1': 'olivier'}
 
 # دوال البايثون
+دالة البايتون (function)  هي عبارة عن مجموعة أوامر متتالية يمكننا مناداتها باسم. 
 
-Une fonction (ou function) est une suite d'instructions que l'on peut appeler avec un nom.
+## إنشاء دالتي الأولى
+نقوم بإنشاء دالة ترجِع العمر:
 
-## Créer ma première fonction
-Créons une fonction qui nous retournera un âge:
-
-    >>> def indique_mon_age():
+    >>> def my_age():
     ...     return 30;
     ... 
-    >>> indique_mon_age()
+    >>> my_age()
     30
-Vous ne pouvez pas copier coller ce code, vous devez entrer chaque ligne à la main et appuyer sur entrée pour retourner à la ligne. Les 3 chevrons et les 3 points sont affichés par l'interpréteur python.
 
-Tout d'abord pour indiquer à l'interpréteur que vous voulez créer une fonction, on utiliser le mot clé def suivi d'un nom puis de parenthèses et ensuite d'un double point.
+عليك أن لا تنسخ وتلصق هذا المثال، أكتبه بيدك سطرا سطرا وأنقر على زر Enter للرجوع إلى السطر في كل مرة. علامات `<` الثلاثة وكذلك النقط الثلاثة معروضة من طرف المؤول.
 
-On remarque également qu'il y a un espace entre les 3 points et le mot clé "return", il s'agit d'une indentation, c'est à dire un espace qui améliore non seulement la lecture de la fonction mais qui indique que nous sommes toujours dans la fonction. Lorsque l'action demandée n'est plus dans la fonction, il ne faut plus indenter le texte. Pour indenter du texte, vous devez appuyer sur la touche TAB de votre clavier -ou dans d'autres cas créer 4 espaces manuellement-.
+بادئ ذي بدء، لإعلام المؤول بأنك تريد إنشاء دالة، تستعمل الكلمة المفاتحية `def` متبوعة باسم وأقواس ثم بنقطتين `:`.
 
-## Les paramètres
-Créons une autre fonction:
-    >>> def augmente_moi(a):
-    ...     return augmente_moi + 2
+نلاحظ أيضا وجود  مسافة فارغة بين الثلاث نقاط `...` والكلمة المفتاحية `return`، وهي تمثّل المسافة البادئة وهي لا تحسّن فقط الكتابة بل تؤشر إلى أننا مازلنا داخل الدالة.  لإضافة المسافة البادئة إضغط على  المفتاح `TAB` في لوحة المفاتيح أو أنقر على مفتاح المسافة 4 مرّات. 
+
+## العوامل (Parameters)
+نقوم بإنشاء دالة أخرى
+    >>> def increment_me(a):
+    ...     return increment_me + 2
     ... 
-    >>> augmente_moi(1)
+    >>> increment_me(1)
     3
-Cette fonction incrémente de 2 une valeur que l'on passe en paramètre.
 
-Il est d'ailleurs possible d'utiliser plusieurs paramètres:
+هذه الدالة تقوم بإضافة 2 للقيمة المدخلة كعامل. يمكن استعمال عدة عوامل:
 
-    >>> def augmente_moi(a, b):
+    >>> def increment_me(a, b):
     ...     return 30 + a + b
     ... 
-    >>> augmente_moi(1, 2)
+    >>> increment_me(1, 2)
     33
-Si vous avez compris les principes des fonctions, vous avez compris 80% de ce qu'est la programmation.
 
-## Un paramètre est obligatoire
-Lorsque vous indiquez des paramètres à une fonction, ces dernièrs doivent impérativement être renseignés sans quoi une erreur apparaitra.
-    >>> def augmente_moi(a, b):
+إن فهمت مبادئ عمل الدوال، تكون قد فهمت 80% من البرمجة.
+
+## عامل أساسي
+
+عندما تضع للدالة عوامل فإن هذه العوامل إجبارية و نسيانها يؤدي إلى خطأ .
+
+    >>> def increment_me(a, b):
     ...     return 30 + a + b
     ...
-    >>> augmente_moi(1)
+    >>> increment_me(1)
     Traceback (most recent call last):
       File "<stdin>", line 1, in <module>
-    TypeError: augmente_moi() takes exactly 2 arguments (1 given)
-## L'opérateur splat
-L'opérateur splat : * est très souvent utilisé en python.
+    TypeError: increment_me() takes exactly 2 arguments (1 given)
 
-    def ma_function(*var)
-    def ma_function(**var)
-    ma_function(*var)
-    ma_function(**var)
-## Une liste en paramètre
-On peut récupérer les valeurs renseignées via une liste:
+## عملية Splat
+العملية Splat  تستعمل كثيرا
 
-    >>> def augmente_moi(*param):
+    def my_function(*var)
+    def my_function(**var)
+    my_function(*var)
+    my_function(**var)
+
+## لائحة عوامل
+بالإمكان استرجاع القيم المدخلة عن طريق لائحة:
+
+    >>> def increment_me(*param):
     ...     return param[0] + param[1] + param[2]
     ... 
-    >>> augmente_moi(1, 2, 3)
+    >>> increment_me(1, 2, 3)
     6
-    >>> augmente_moi(10, 20, 30)
+    >>> increment_me(10, 20, 30)
     60
+
 ## Rendre obligatoire uniquement certains paramètres avec une liste
 Si vous désirez rendre obligatoire uniquement certains paramètres, vous pouvez utiliser la syntaxe suivante:
 
